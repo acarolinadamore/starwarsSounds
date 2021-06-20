@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Star Wars</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="keys">
+        <div class="flex-row">
+        <div data-key="79" onclick="playSound()" class="key">
+          <kbd>O</kbd>
+          <span class="sound">Obi-Wan</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span class="sound">General Grievous</span>
+        </div>
+        <div data-key="86" class="key">
+          <kbd>V</kbd>
+          <span class="sound">Darth Vader</span>
+        </div>
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">Anakin Skywalker</span>
+        </div>
+        <div data-key="80" class="key">
+          <kbd>P</kbd>
+          <span class="sound">Padmé</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span class="sound">Leia</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span class="sound">Han Solo</span>
+        </div>
+        <div data-key="87" class="key">
+          <kbd>W</kbd>
+          <span class="sound">Chewbacca</span>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div data-key="89" class="key">
+          <kbd>Y</kbd>
+          <span class="sound">Yoda</span>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="sound">Luke Skywalker</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="sound">R2D2</span>
+        </div>
+        <div data-key="67" class="key">
+          <kbd>C</kbd>
+          <span class="sound">CP30</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="sound">Kylo Ren</span>
+        </div>
+        <div data-key="82" class="key">
+          <kbd>R</kbd>
+          <span class="sound">Rey</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="sound">Finn</span>
+        </div>
+        <div data-key="69" class="key">
+          <kbd>E</kbd>
+          <span class="sound">Poe</span>
+        </div>
+      </div>
+    </div>
+
+    <audio data-key="79" src="sounds/obi.mp3""></audio>
+    <audio data-key="71" src="sounds/generalkenobi.mp3"></audio>
+    <audio data-key="86" src="sounds/vader.mp3"></audio>
+    <audio data-key="65" src="sounds/anakinhighground.mp3"></audio>
+    <audio data-key="80" src="sounds//padme"></audio>
+    <audio data-key="76" src="sounds/leia.mp3"></audio>
+    <audio data-key="72" src="sounds/hansolo.mp3"></audio>
+    <audio data-key="87" src="sounds/chewie.mp3"></audio>
+    <audio data-key="89" src="sounds/yoda.mp3"></audio>
+    <audio data-key="83" src="sounds/lukeimjedi.mp3"></audio>
+    <audio data-key="68" src="sounds/r2d2.mp3"></audio>
+    <audio data-key="67" src="sounds/c3po.mp3"></audio>
+    <audio data-key="75" src="sounds/kyloall.mp3"></audio>
+    <audio data-key="82" src="sounds/reyskywalker.mp3"></audio>
+    <audio data-key="70" src="sounds/finn.mp3"></audio>
+    <audio data-key="69" src="sounds/poe.mp3"></audio>
+
+    <script>
+      function playSound(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if(!audio) return; 
+        audio.currentTime = 0; //volta pro inicio
+        audio.play();
+        key.classList.add('playing');        
+      };
+      
+      function removeTransition(e){
+        if (e.propertyName !=='transform') return; // pula se não é transform
+        this.classList.remove('playing');
+      }
+      
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(key => key.addEventListener('transitionend',removeTransition));
+      
+      window.addEventListener('keydown',playSound);
+      document.addEventListener('click',playSound);
+      
+      </script>
+
+
+  </body>
+</html>
