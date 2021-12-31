@@ -7,7 +7,17 @@
   </head>
   <body>
     <div class="keys">
-        <div class="flex-row">
+      <div class="flex-row">
+        <div id="87" class="key" onClick="playSound(this.id)">
+          <audio src="sounds/chewie.mp3"></audio>
+          <div>W</div>
+          <span class="sound">Chewbacca</span>
+        </div>
+        <div id="79" class="key" onClick="playSound(this.id)">
+          <audio src="/sounds/obi.mp3"></audio>
+          <div>O</div>
+          <span class="sound">Obi-Wan</span>
+        </div>
         <div data-key="79" onclick="playSound()" class="key">
           <kbd>O</kbd>
           <span class="sound">Obi-Wan</span>
@@ -77,46 +87,45 @@
       </div>
     </div>
 
-    <audio data-key="79" src="sounds/obi.mp3""></audio>
-    <audio data-key="71" src="sounds/generalkenobi.mp3"></audio>
-    <audio data-key="86" src="sounds/vader.mp3"></audio>
-    <audio data-key="65" src="sounds/anakinhighground.mp3"></audio>
-    <audio data-key="80" src="sounds//padme"></audio>
-    <audio data-key="76" src="sounds/leia.mp3"></audio>
-    <audio data-key="72" src="sounds/hansolo.mp3"></audio>
-    <audio data-key="87" src="sounds/chewie.mp3"></audio>
-    <audio data-key="89" src="sounds/yoda.mp3"></audio>
-    <audio data-key="83" src="sounds/lukeimjedi.mp3"></audio>
-    <audio data-key="68" src="sounds/r2d2.mp3"></audio>
-    <audio data-key="67" src="sounds/c3po.mp3"></audio>
-    <audio data-key="75" src="sounds/kyloall.mp3"></audio>
+    <audio data-key="79" src="/sounds/obi.mp3"></audio>
+    <audio data-key="71" src="/sounds/generalkenobi.mp3"></audio>
+    <audio data-key="86" src="/sounds/vader.mp3"></audio>
+    <audio data-key="65" src="/sounds/anakinhighground.mp3"></audio>
+    <audio data-key="80" src="/sounds/padme.mp3"></audio>
+    <audio data-key="76" src="/sounds/leia.mp3"></audio>
+    <audio data-key="72" src="/sounds/hansolo.mp3"></audio>
+    <audio data-key="87" src="/sounds/chewie.mp3"></audio>
+    <audio data-key="89" src="/sounds/yoda.mp3"></audio>
+    <audio data-key="83" src="/sounds/lukeimjedi.mp3"></audio>
+    <audio data-key="68" src="/sounds/r2d2.mp3"></audio>
+    <audio data-key="67" src="/sounds/c3po.mp3"></audio>
+    <audio data-key="75" src="/sounds/kyloall.mp3"></audio>
     <audio data-key="82" src="sounds/reyskywalker.mp3"></audio>
-    <audio data-key="70" src="sounds/finn.mp3"></audio>
-    <audio data-key="69" src="sounds/poe.mp3"></audio>
+    <audio data-key="70" src="/sounds/finn.mp3"></audio>
+    <audio data-key="69" src="/sounds/poe.mp3"></audio>
 
-    <script>
+    <script src="script.js">
       function playSound(e) {
         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
         const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-        if(!audio) return; 
+        if (!audio) return;
         audio.currentTime = 0; //volta pro inicio
         audio.play();
-        key.classList.add('playing');        
-      };
-      
-      function removeTransition(e){
-        if (e.propertyName !=='transform') return; // pula se não é transform
+        key.classList.add('playing');
+      }
+
+      function removeTransition(e) {
+        if (e.propertyName !== 'transform') return; // pula se não é transform
         this.classList.remove('playing');
       }
-      
+
       const keys = document.querySelectorAll('.key');
-      keys.forEach(key => key.addEventListener('transitionend',removeTransition));
-      
-      window.addEventListener('keydown',playSound);
-      document.addEventListener('click',playSound);
-      
-      </script>
+      keys.forEach((key) =>
+        key.addEventListener('transitionend', removeTransition)
+      );
 
-
+      window.addEventListener('keydown', playSound);
+      document.addEventListener('click', playSound);
+    </script>
   </body>
 </html>
